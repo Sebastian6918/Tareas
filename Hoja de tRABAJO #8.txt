@@ -1,0 +1,65 @@
+Ejercicio #1
+tamano = int(input("Ingrese el tamaño del arreglo: "))
+base = int(input("Ingrese el número base para los múltiplos: "))
+
+arreglo = [] 
+for i in range(1, tamano + 1):
+    arreglo.append(base * i)  
+
+print(f"El arreglo de los primeros múltiplos de {base} es: {arreglo}")
+
+Ejercicio #2
+tamano = int(input("Ingrese el tamaño de los arreglos: "))
+
+nombres = []  
+longitudes = [] 
+
+for i in range(tamano):
+
+    nombre = input(f"Ingrese el nombre {i + 1}: ")
+    
+    nombres.append(nombre)  
+
+    longitudes.append(len(nombre)) 
+
+print(f"Nombres: {nombres}")
+print(f"Longitudes: {longitudes}")
+
+Ejercicio #3
+n = int(input("Ingrese el número de clientes atendidos: "))
+
+respuestas = []
+
+for i in range(1, n + 1):
+    respuesta = int(input(f"Ingrese la evaluación del cliente {i} (1 a 5): "))
+    while respuesta < 1 or respuesta > 5:
+        print("Por favor, ingrese una evaluación entre 1 y 5.")
+        respuesta = int(input(f"Ingrese la evaluación del cliente {i} (1 a 5): "))
+    respuestas.append(respuesta)
+
+respuestas_count = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+
+for respuesta in respuestas:
+    respuestas_count[respuesta] += 1
+
+respuesta_mas_frecuente = max(respuestas_count, key=respuestas_count.get)
+
+promedio = sum(respuestas) / n
+
+menores_al_promedio = [respuesta for respuesta in respuestas if respuesta < promedio]
+porcentaje_menor_al_promedio = (len(menores_al_promedio) / n) * 100
+
+print("\nRespuestas:")
+print(f"a) Total de respuestas por tipo:")
+print(f"Excelente (5): {respuestas_count[5]}")
+print(f"Muy Buena (4): {respuestas_count[4]}")
+print(f"Buena (3): {respuestas_count[3]}")
+print(f"Regular (2): {respuestas_count[2]}")
+print(f"Malo (1): {respuestas_count[1]}")
+
+print(f"\nb) Respuesta más frecuente: {respuesta_mas_frecuente}")
+
+print(f"\nc) Promedio: {promedio:}")
+
+print(f"\nd) Porcentaje de clientes con respuestas menores al promedio: {porcentaje_menor_al_promedio:}%")
+
