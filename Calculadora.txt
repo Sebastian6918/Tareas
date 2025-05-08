@@ -1,0 +1,77 @@
+class OperacionCientifica:
+    def calcular(self):
+        pass
+
+class RaizCuadrada(OperacionCientifica):
+    def _init_(self, numero):
+        self.numero = numero
+
+    def calcular(self):
+        if self.numero < 0:
+            raise Exception("No se puede calcular la raíz cuadrada de un número negativo.")
+        return self.numero ** 0.5
+
+class Potencia(OperacionCientifica):
+    def _init_(self, base, exponente):
+        self.base = base
+        self.exponente = exponente
+
+    def calcular(self):
+        return self.base ** self.exponente
+
+class Logaritmo(OperacionCientifica):
+    def _init_(self, numero):
+        self.numero = numero
+
+    def calcular(self):
+        if self.numero <= 0:
+            raise Exception("No se puede calcular el logaritmo de un número no positivo.")
+        n = self.numero
+        resultado = 0
+        x = (n - 1) / (n + 1)
+        for i in range(1, 100, 2):
+            resultado += (1 / i) * (x ** i)
+        return 2 * resultado
+
+class Factorial(OperacionCientifica):
+    def _init_(self, numero):
+        self.numero = numero
+
+    def calcular(self):
+        if self.numero < 0 or int(self.numero) != self.numero:
+            raise Exception("El factorial solo se puede calcular de números enteros no negativos.")
+        resultado = 1
+        for i in range(1, int(self.numero) + 1):
+            resultado *= i
+        return resultado
+
+print("Calculadora Científica")
+print("1. Raíz Cuadrada")
+print("2. Potencia")
+print("3. Logaritmo")
+print("4. Factorial")
+
+opcion = input("Elige una opción (1-4): ")
+
+try:
+    if opcion == "1":
+        n = float(input("Ingresa un número: "))
+        operacion = RaizCuadrada(n)
+    elif opcion == "2":
+        base = float(input("Ingresa la base: "))
+        exponente = float(input("Ingresa el exponente: "))
+        operacion = Potencia(base, exponente)
+    elif opcion == "3":
+        n = float(input("Ingresa un número: "))
+        operacion = Logaritmo(n)
+    elif opcion == "4":
+        n = float(input("Ingresa un número entero: "))
+        operacion = Factorial(n)
+    else:
+        raise Exception("Opción no válida.")
+
+    resultado = operacion.calcular()
+    print("Resultado:", resultado)
+
+except Exception as error:
+    print("Error:", error)
