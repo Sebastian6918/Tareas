@@ -1,0 +1,50 @@
+dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
+
+azucar = [130, 160, 95, 175, 160]       
+sal = [2000, 2400, 1800, 2400, 2700]    
+sistolica = [115, 130, 110, 125, 175]   
+diastolica = [75, 78, 70, 72, 95]       
+
+def evaluar_azucar(valor):
+    if 70 <= valor <= 140:
+        return "Azúcar en buen rango."
+    elif valor < 70:
+        return "Azúcar muy baja, hay que tener cuidado."
+    else:
+        return "Azúcar muy alta, mejor revisar la dieta o consultar al médico."
+
+def evaluar_sal(valor):
+    if valor <= 2300:
+        return "Consumo de sal dentro de lo permitido."
+    else:
+        return "Se pasó con la sal ese día, ojo con la presión."
+
+def clasificar_presion(s, d):
+    if s < 120 and d < 80:
+        return "Presión normal, todo bien."
+    elif 120 <= s <= 129 and d < 80:
+        return "Presión un poco elevada, pero no grave."
+    elif 130 <= s <= 139 or 80 <= d <= 89:
+        return "Presión algo alta, debería vigilarse."
+    elif s >= 140 or d >= 90:
+        return "Presión muy alta, necesita atención médica."
+    else:
+        return "No se pudo clasificar con precisión."
+
+print("REPORTE SEMANAL DEL PACIENTE:\n")
+for i in range(5):
+    print(f"{dias[i]}:")
+    print(f"  Azúcar: {azucar[i]} mg/dL -> {evaluar_azucar(azucar[i])}")
+    print(f"  Sal: {sal[i]} mg -> {evaluar_sal(sal[i])}")
+    print(f"  Presión: {sistolica[i]}/{diastolica[i]} mmHg -> {clasificar_presion(sistolica[i], diastolica[i])}")
+    print()
+
+prom_azucar = sum(azucar) / 5
+prom_sal = sum(sal) / 5
+prom_sistolica = sum(sistolica) / 5
+prom_diastolica = sum(diastolica) / 5
+
+print("RESUMEN SEMANAL:")
+print(f"  Azúcar promedio: {prom_azucar:.1f} mg/dL -> {evaluar_azucar(prom_azucar)}")
+print(f"  Sal promedio: {prom_sal:.1f} mg -> {evaluar_sal(prom_sal)}")
+print(f"  Presión promedio: {prom_sistolica:.1f}/{prom_diastolica:.1f} mmHg -> {clasificar_presion(prom_sistolica, prom_diastolica)}")
