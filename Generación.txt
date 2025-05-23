@@ -1,0 +1,62 @@
+def mostrartablero(tablero):
+    for fila in tablero:
+        print(" ".join(str(celda) for celda in fila))
+    print()
+
+def contarvecinos(tablero, f, c):
+    vivos = 0
+    if c > 0:
+        vivos += tablero[f][c - 1]
+    if c < len(tablero[0]) - 1:
+        vivos += tablero[f][c + 1]
+    return vivos
+
+def siguientegen(actual):
+    filas = len(actual)
+    columnas = len(actual[0])
+    nuevo = []
+
+    for i in range(filas):
+        fila = []
+        for j in range(columnas):
+            vecinos = contarvecinos(actual, i, j)
+            celda = actual[i][j]
+
+            if celda == 1:
+                if vecinos in [1, 2]:
+                    fila.append(1)
+                else:
+                    fila.append(0)
+            else:
+                if vecinos == 1:
+                    fila.append(1)
+                else:
+                    fila.append(0)
+        
+        nuevo.append(fila)
+    
+    return nuevo
+
+tablero = [
+    [0,0,0,0,0,0,0,1,1,0],
+    [0,1,1,0,0,0,0,0,0,0],
+    [0,1,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,1,1,0,0,0],
+    [0,0,0,0,0,1,1,0,0,0],
+    [0,0,1,1,0,0,0,0,0,0],
+    [0,0,1,1,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,1,0],
+]
+
+print("Generación 0:")
+mostrartablero(tablero)
+
+gen1 = siguientegen(tablero)
+print("Generación 1:")
+mostrartablero(gen1)
+
+gen2 = siguientegen(gen1)
+print("Generación 2:")
+mostrartablero(gen2)
